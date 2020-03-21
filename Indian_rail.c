@@ -26,7 +26,7 @@ struct Station
       }
  if(S.NoOfseatsleft < 0)
       {
-               printf(" SEATS CAN'T BE NEGATIVE \N");
+               printf(" SEATS CAN'T BE NEGATIVE \n");
                exit(0);
                
        }
