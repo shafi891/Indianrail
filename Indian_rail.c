@@ -16,7 +16,7 @@ struct Rail_Station
      void Rail_station_init()
   {
       seating_counter= 0;
-         remains= 0;
+        remains= 0;
       printf("\n ENTER THE TRAIN'S CAPACITY : ");
           scanf("%d", &S.No_Of_seatsleft);
         if(S.No_Of_seatsleft == 0)
@@ -34,19 +34,20 @@ struct Rail_Station
               scanf("%d", &S.waiting_Passenger);
    if(S.waiting_Passenger<0)
       {
-              printf("PASSENGER CAN'T BE NEGATIVE \N ");
+              printf("PASSENGER CAN'T BE NEGATIVE \n ");
        exit(0);
       }
       
          if (S.waiting_Passenger > S.No_Of_seatsleft)
   {
                    remains = S.waiting_Passenger - S.No_Of_seatsleft ;
-   printf("\n\n %d PASSENGER LEFT AT STATION .\N\N",remains);
+   printf("\n\n %d PASSENGER LEFT AT STATION .\n\n",remains);
           S.waiting_Passenger = S.No_Of_seatsleft ;
    
    
-  }
+    }
     
+ }
       
       void* Rail_station_train_load(void *args)
       {
@@ -59,30 +60,30 @@ struct Rail_Station
                 
                   if(plt-> No_Of_seatsleft<0){
                             printf("\n SEATS LEFT: 0 \n");}
-                if(allPassenger_seated == 1 || plt-> No_Of_seatsleft== 1)
+                if(allPassenger_seated == 1 || plt-> No_Of_seatsleft== 0)
                 {
                printf("\n SEATS LEFT: %d \n", plt-> No_Of_seatsleft)
                 printf("\n TRAIN DEPARTED...\n");
                 }
                 if(remains > 0)
                 {
-                    prointf("\n REMAINS PASSENGERS =%d \n, remaind);
+                    prointf("\n REMAINS PASSENGERS =%d \n", remains);
                             }
                      } 
        void Rail_station_board(struct station *stc)
             { seating_counter ++;
-                  sem_wait(&s.lock);
+                  sem_wait(&S.lock);
                 allPassenger_seated= 0;
                    stc-> No_Of_seatsleft--;
                 printf("%d SUCCESSFULLY PASSENGERS ARE  SEATED \n",seating_counter);
                      allPassenger_seated= 1;
-             sem_post(&S.lock,0,1);
+             sem_post(&S.lock);
              }
                          
        void* Rail_station_wait_for_train(void *args)
                             {
-                 struct Rail_station *plt = (struct Rail_station * args);
-                  if((train_arrived ==1) &&(p-> No_Of_seatsleft<0))
+                 struct Rail_station *plt = (struct Rail_station *)args;
+                  if((train_arrived ==1) &&(p-> No_Of_seatsleft>0))
                   {
                    Rail_station_board(plt);
                   }
@@ -93,10 +94,34 @@ struct Rail_Station
       
      int main()
      {
-      int j = 0; array = 0;
+      int j = 0; All_waiting; array = 0;
            printf("\t\t!!!...INDIAN~TRAIN~IS~BOOTING...!!! \n");
          
                 for(j=0; j<8; j++)
                 { 
-                     printf(".-.-.-.-.-.-.-")
+                     printf(".-.-.-.-.-.-.-");
+                 sleep(2);
+                }
+      printf("\n\n\n");
+           while(1)
+           {
+            printf("\n IF YOU WANT TO EXIT, PRESS CTRL + C\n");
+              Rail_station_init()
+               pthread_t train, passenger[All_waiting.1]; //create passenger and train thread
+            sem_init(&s.lock)
+               pthread_create(& train, NULL, Rail_station_train_load,&s);
+            sleep(3);
+        for(j=0;j<All-waiting;j++)
+               {
+           pthread_create(&passenger[j],NULL, Rail_station_wait_for_train,&s);
+             printf("\n PASSANGER%d IS ARRIVED AT STATION\n",j+1);
+        }
+        for(j=0;j<All_waiting;j++)
+        { pthread_join(passenger[j],NULL.);}
+            Pthread_join(train,NULL);
+            
+           } return 0;
+     }
+         
+            
    
