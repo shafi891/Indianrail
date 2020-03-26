@@ -109,15 +109,15 @@ struct Rail_Station
               Rail_station_init()
                pthread_t train, passenger[All_waiting.1]; //create passenger and train thread
             sem_init(&s.lock)
-               pthread_create(& train, NULL, Rail_station_train_load,&s);
+               pthread_create(& train, NULL, Rail_station_train_load,&S);
             sleep(3);
         for(j=0;j<All-waiting;j++)
                {
-           pthread_create(&passenger[j],NULL, Rail_station_wait_for_train,&s);
+           pthread_create(&passenger[j],NULL, Rail_station_wait_for_train,&S);
              printf("\n PASSANGER%d IS ARRIVED AT STATION\n",j+1);
         }
         for(j=0;j<All_waiting;j++)
-        { pthread_join(passenger[j],NULL.);}
+        { pthread_join(passenger[j],NULL);}
             Pthread_join(train,NULL);
             
            } return 0;
